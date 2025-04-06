@@ -18,7 +18,7 @@ const HomePage = async () => {
       <Welcome />
       <Choose/>
       <Feature/>
-      <Review results={data}/>
+      <Review results ={data}/>
       <Price />
       <Footer/>
     </div>

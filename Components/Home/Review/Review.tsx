@@ -97,8 +97,8 @@ const responsive = {
     public_url: null;
   }
 
-  interface ListItem {
-    results : NotionPageItem[]
+export interface ListItem {
+    results : NotionPageItem[] | undefined
   }
 
 const Review =  ({results} :ListItem) => {
