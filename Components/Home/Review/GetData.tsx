@@ -1,5 +1,4 @@
 import { Client } from "@notionhq/client"
-import { ListItem } from "./Review"
 
 
 interface NotionPageItem {
@@ -27,7 +26,7 @@ interface NotionPageItem {
       Rating: {
         id: string;
         type: 'number';
-        number: number | null; // Có thể là null nếu không có giá trị
+        number: number ; // Có thể là null nếu không có giá trị
       };
       Text: {
         id: string;
