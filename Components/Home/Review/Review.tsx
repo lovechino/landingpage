@@ -4,6 +4,7 @@ import Carousel from "react-multi-carousel";
 import 'react-multi-carousel/lib/styles.css';
 import Card from './Card';
 import img from "../Images/images.png"
+import { Client } from "@notionhq/client"
 const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -22,7 +23,13 @@ const responsive = {
     }
   };
 
-const Review = () => {
+
+const Review =  ({results} : {results : unknown}) => {
+  // results.map((item)=>console.log(item.properties.Rating.number))
+  // item.properties.Name.title[0].plain_text
+  // item.properties.Text.rich_text[0].plain_text
+//  const data = await GetReview()
+//  console.log(data)
   return (
     <div id='review' className=' pt-16 pb-16 bg-[#fcf6fa]'>
         <h2 className=' mt-6 text-2xl md:text-3xl capitalize font-bold text-center'>What client say about us</h2>
@@ -35,14 +42,43 @@ const Review = () => {
                showDots = {true}
                infinite={true}
             >
-                <Card name = "test" image = {img}/>
-                <Card name = "test" image = {img}/>
-                <Card name = "test" image = {img}/>
-                <Card name = "test" image = {img}/>
+               {/* <Card name='test' image={img}/>
+               <Card name='test' image={img}/>
+               <Card name='test' image={img}/>
+               {
+                results?.map((item,index)=>{
+                  <Card key={index} name='dsdsd' image={img}/>
+                })
+               } */}
+               {
+              results.map((item)=>(
+                // eslint-disable-next-line react/jsx-key
+                <Card image={img} name= { item.properties.Name.title[0].plain_text} text= {item.properties.Text.rich_text[0].plain_text} rate={item.properties.Rating.number}/>
+              ))
+            }
             </Carousel>
+            
         </div>
+       
     </div>
   )
+}
+
+
+export const GetReview = async ()=>{
+    
+  try{
+      const notion = new Client({auth : "ntn_w20748058256ErM2tsTcuwnawmMawV7mDwJDsEOYL5mdos"})
+
+  const databaseId = "1cd07bab064180988837dffbbf74cf9a"
+
+  const response = await notion.databases.query({
+      database_id: databaseId,
+  })
+  return response.results
+  }catch(err){
+      console.log(err)
+  }
 }
 
 export default Review

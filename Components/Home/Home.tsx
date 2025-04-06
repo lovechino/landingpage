@@ -5,16 +5,20 @@ import Feature from './Feature/Feature'
 import Review from './Review/Review'
 import Price from './Price/Price'
 import Footer from './Footer/Footer'
+import { GetReview } from './Review/GetData'
 
 
 
-const HomePage = () => {
+
+
+const HomePage = async () => {
+  const data = await GetReview()
   return (
     <div className=' overflow-hidden'>
       <Welcome />
       <Choose/>
       <Feature/>
-      <Review/>
+      <Review results={data}/>
       <Price />
       <Footer/>
     </div>
