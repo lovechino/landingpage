@@ -129,7 +129,7 @@ console.log(results)
                 })
                } */}
                {
-              results.map((item)=>(
+               results &&  results.map((item)=>(
                 // eslint-disable-next-line react/jsx-key
                 <Card image={img} name= { item.properties.Name.title[0].plain_text} text= {item.properties.Text.rich_text[0].plain_text} rate={item.properties.Rating.number}/>
               ))
