@@ -7,7 +7,7 @@ type Props = {
     name : string,
     image : StaticImageData,
     text : string,
-    rate : number
+    rate : number 
 }
 
 interface StartRatingProps {
