@@ -23,13 +23,91 @@ const responsive = {
     }
   };
 
+  interface NotionPageItem {
+    object: 'page';
+    id: string;
+    created_time: string;
+    last_edited_time: string;
+    created_by: {
+      object: 'user';
+      id: string;
+    };
+    last_edited_by: {
+      object: 'user';
+      id: string;
+    };
+    cover: null;
+    icon: null;
+    parent: {
+      type: 'database_id';
+      database_id: string;
+    };
+    archived: boolean;
+    in_trash: boolean;
+    properties: {
+      Rating: {
+        id: string;
+        type: 'number';
+        number: number | null; // Có thể là null nếu không có giá trị
+      };
+      Text: {
+        id: string;
+        type: 'rich_text';
+        rich_text: {
+          type: 'text';
+          text: {
+            content: string;
+            link: null;
+          };
+          annotations: {
+            bold: boolean;
+            italic: boolean;
+            strikethrough: boolean;
+            underline: boolean;
+            code: boolean;
+            color: string; // Có thể có nhiều giá trị khác nhau, để string cho tổng quát
+          };
+          plain_text: string;
+          href: null;
+        }[];
+      };
+      Name: {
+        id: string;
+        type: 'title';
+        title: {
+          type: 'text';
+          text: {
+            content: string;
+            link: null;
+          };
+          annotations: {
+            bold: boolean;
+            italic: boolean;
+            strikethrough: boolean;
+            underline: boolean;
+            code: boolean;
+            color: string; // Tương tự như Text
+          };
+          plain_text: string;
+          href: null;
+        }[];
+      }
+    };
+    url: string;
+    public_url: null;
+  }
 
-const Review =  ({results} : {results : unknown}) => {
-  // results.map((item)=>console.log(item.properties.Rating.number))
+  interface ListItem {
+    results : NotionPageItem[]
+  }
+
+const Review =  ({results} :ListItem) => {
+  // results.map((item)=>console.log(item))
   // item.properties.Name.title[0].plain_text
   // item.properties.Text.rich_text[0].plain_text
 //  const data = await GetReview()
 //  console.log(data)
+console.log(results)
   return (
     <div id='review' className=' pt-16 pb-16 bg-[#fcf6fa]'>
         <h2 className=' mt-6 text-2xl md:text-3xl capitalize font-bold text-center'>What client say about us</h2>
